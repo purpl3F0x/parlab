@@ -2,7 +2,7 @@ name: Formatting check
 on: [push, pull_request]
 jobs:
   formatting-check:
-    name: Formatting Check
+    name: clang-format style check
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -11,7 +11,7 @@ jobs:
       with:
         clang-format-version: '18'
   linter_name:
-    name: runner / black formatter
+    name: Python - black formatter
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
