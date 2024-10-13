@@ -9,7 +9,7 @@ data = []
 
 # Regex to extract details from each line
 pattern = re.compile(
-    r"GameOfLife: Size (?P<size>\d+) Steps (?P<steps>\d+) Time (?P<time>\d+\.\d+) Threads (?P<threads>\d)"
+    r"GameOfLife: Size (?P<size>\d+) Steps (?P<steps>\d+) Time (?P<time>\d+\.\d+) Threads (?P<threads>\d+)"
 )
 
 # Read results
@@ -28,31 +28,35 @@ with open("results.out") as f:
 # Create a DataFrame from the data
 df = pd.DataFrame(data)
 df.sort_values(by=["size", "steps", "threads"], inplace=True)
+df = df.groupby(["size", "threads"]).mean().reset_index()
+# Calculate speedup
+df["speedup"] = df.groupby("size")["time"].transform(lambda x: x.min() / x)
+
 print(df)
+
 
 sns.set_theme(style="whitegrid")
 plt.style.use("bmh")
 plt.rcParams["font.family"] = "Cambria"
 
-# Create a plot for each size
-sns.pointplot(data=df[df["size"] == 64], x="threads", y="time")
-plt.title("Size 64")
-plt.xlabel("Threads")
-plt.ylabel("Time (s)")
-plt.savefig("64.svg")
-plt.clf()
+# Time plot
+plt.title("Time vs Threads")
+g = sns.FacetGrid(df, col="size", hue="size", sharey=False, height=5)
+g.map(sns.lineplot, "threads", "time", marker="o", markersize=10)
+g.add_legend()
+g.set(xticks=df.threads.unique())
+g.set_titles("Size = {col_name}")
+g.set_xlabels("# Threads")
+g.set_ylabels("Time (s)")
+plt.savefig("time.svg")
 
+# Speedup plot
 
-sns.pointplot(data=df[df["size"] == 1024], x="threads", y="time")
-plt.title("Size 1024")
-plt.xlabel("Threads")
-plt.ylabel("Time (s)")
-plt.savefig("1024.svg")
-plt.clf()
-
-
-sns.pointplot(data=df[df["size"] == 4096], x="threads", y="time")
-plt.title("Size 4096")
-plt.xlabel("Threads")
-plt.ylabel("Time (s)")
-plt.savefig("4096.svg")
+g = sns.FacetGrid(df, col="size", hue="size", sharey=True, height=5)
+g.map(sns.lineplot, "threads", "speedup", marker="o", markersize=10)
+g.set_titles("Size = {col_name}")
+g.add_legend()
+g.set(xticks=df.threads.unique())
+g.set_xlabels("# Threads")
+g.set_ylabels("Speedup")
+plt.savefig("speedup.svg")
