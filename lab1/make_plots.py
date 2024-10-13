@@ -30,7 +30,9 @@ df = pd.DataFrame(data)
 df.sort_values(by=["size", "steps", "threads"], inplace=True)
 df = df.groupby(["size", "threads"]).mean().reset_index()
 # Calculate speedup
-df["speedup"] = df.groupby("size")["time"].transform(lambda x: x.min() / x)
+df["speedup"] = df.groupby(["size", "steps"])[["time"]].transform(
+    lambda x: x.iloc[0] / x
+)
 
 print(df)
 
