@@ -40,25 +40,73 @@ print(df)
 sns.set_theme(style="whitegrid")
 plt.style.use("bmh")
 plt.rcParams["font.family"] = "Cambria"
+plt.rcParams["font.size"] = 12
+bmh_colors = iter(plt.rcParams["axes.prop_cycle"].by_key()["color"])
 
-# Time plot
-plt.title("Time vs Threads")
-g = sns.FacetGrid(df, col="size", hue="size", sharey=False, height=5)
-g.map(sns.lineplot, "threads", "time", marker="o", markersize=10)
-g.add_legend()
-g.set(xticks=df.threads.unique())
-g.set_titles("Size = {col_name}")
-g.set_xlabels("# Threads")
-g.set_ylabels("Time (s)")
-plt.savefig("time.svg")
+# # Time plot
+# plt.title("Time vs Threads")
+# g = sns.FacetGrid(df, col="size", hue="size", sharey=False, height=5)
+# g.map(sns.lineplot, "threads", "time", marker="o", markersize=10)
+# g.add_legend()
+# g.set(xticks=df.threads.unique())
+# g.set_titles("Size = {col_name}")
+# g.set_xlabels("# Threads")
+# g.set_ylabels("Time (s)")
+# plt.savefig("time.svg")
 
-# Speedup plot
+# # Speedup plot
 
-g = sns.FacetGrid(df, col="size", hue="size", sharey=True, height=5)
-g.map(sns.lineplot, "threads", "speedup", marker="o", markersize=10)
-g.set_titles("Size = {col_name}")
-g.add_legend()
-g.set(xticks=df.threads.unique())
-g.set_xlabels("# Threads")
-g.set_ylabels("Speedup")
-plt.savefig("speedup.svg")
+# g = sns.FacetGrid(df, col="size", hue="size", sharey=True, height=5)
+# g.map(sns.lineplot, "threads", "speedup", marker="o", markersize=10)
+# g.set_titles("Size = {col_name}")
+# g.add_legend()
+# g.set(xticks=df.threads.unique())
+# g.set_xlabels("# Threads")
+# g.set_ylabels("Speedup")
+# plt.savefig("speedup.svg")
+
+# Create three graphs for each size
+for size in df["size"].unique():
+    fig, axs = plt.subplots(1, 2, figsize=(14, 7))
+    current_color = next(bmh_colors)
+
+    # Filter data for the current size
+    size_df = df[df["size"] == size]
+
+    # Plot Time vs Threads
+    sns.lineplot(
+        x="threads",
+        y="time",
+        data=size_df,
+        marker="o",
+        markersize=10,
+        ax=axs[0],
+        color=current_color,
+    )
+    axs[0].set_title(f"Time vs Threads for Size {size}")
+    axs[0].set_xlabel("# Threads")
+    axs[0].set_ylabel("Time (s)")
+    axs[0].set_xticks(size_df.threads.unique())
+
+    # Plot Speedup vs Threads
+    sns.lineplot(
+        x="threads",
+        y="speedup",
+        data=size_df,
+        marker="o",
+        markersize=10,
+        ax=axs[1],
+        color=current_color,
+    )
+    axs[1].set_title(f"Speedup vs Threads for Size {size}")
+    axs[1].set_xlabel("# Threads")
+    axs[1].set_ylabel("Speedup")
+    axs[1].set_xticks(size_df.threads.unique())
+
+    # Add a title to the figure
+    fig.suptitle(f"Size = {size}", fontsize=24)
+
+    # Adjust layout and save the figure
+    plt.tight_layout()
+    plt.savefig(f"size_{size}.svg")
+    plt.show()
