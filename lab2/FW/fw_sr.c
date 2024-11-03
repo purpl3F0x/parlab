@@ -98,9 +98,7 @@ void FW_SR(int** A,
      */
     if (myN <= 256) {
         for (k = 0; k < 256; k++)
-            #pragma omp simd
             for (i = 0; i < 256; i++)
-                #pragma omp simd
                 for (j = 0; j < myN; j++) {
                     A[arow + i][acol + j] =
                       min(A[arow + i][acol + j], B[brow + i][bcol + k] + C[crow + k][ccol + j]);

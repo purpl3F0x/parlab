@@ -5,8 +5,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-void graph_init_random(int **adjm, int seed, int n, int m)
-{
+void graph_init_random(int** adjm, int seed, int n, int m) {
     int i, j;
 
     srand48(seed);

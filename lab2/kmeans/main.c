@@ -1,7 +1,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>    /* strtok() */
+#include <string.h> /* strtok() */
 #include <sys/stat.h>
 #include <sys/types.h> /* open() */
 #include <unistd.h>    /* getopt() */
@@ -9,9 +9,8 @@
 int _debug;
 #include "kmeans.h"
 
-static void usage(char *argv0)
-{
-    char *help = "Usage: %s [switches]\n"
+static void usage(char* argv0) {
+    char* help = "Usage: %s [switches]\n"
                  "       -c num_clusters    : number of clusters (must be > 1)\n"
                  "       -s size            : size of examined dataset\n"
                  "       -n num_coords      : number of coordinates\n"
@@ -23,52 +22,51 @@ static void usage(char *argv0)
     exit(-1);
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char** argv) {
     long         i, j, opt;
-    extern char *optarg;
+    extern char* optarg;
     extern int   optind;
 
     long    numClusters = 0, numCoords = 0, numObjs = 0;
-    int    *membership; // [numObjs]
-    double *objects;    // [numObjs * numCoords] data  objects
-    double *clusters;   // [numClusters * numCoords] cluster center
+    int*    membership; // [numObjs]
+    double* objects;    // [numObjs * numCoords] data  objects
+    double* clusters;   // [numClusters * numCoords] cluster center
     double  dataset_size = 0, threshold;
     long    loop_threshold;
-    double   io_timing_read;
+    double  io_timing_read;
 
     /* some default values */
-    _debug = 0;
-    threshold = 0.001;
+    _debug         = 0;
+    threshold      = 0.001;
     loop_threshold = 10;
-    numClusters = 0;
+    numClusters    = 0;
 
     LOG("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n");
 
     while ((opt = getopt(argc, argv, "n:t:l:c:s:dh")) != EOF) {
         switch (opt) {
-        case 'c':
-            numClusters = atol(optarg);
-            break;
-        case 't':
-            threshold = atof(optarg);
-            break;
-        case 'l':
-            loop_threshold = atol(optarg);
-            break;
-        case 's':
-            dataset_size = atof(optarg);
-            break;
-        case 'n':
-            numCoords = atol(optarg);
-            break;
-        case 'd':
-            _debug = 1;
-            break;
-        case 'h':
-        default:
-            usage(argv[0]);
-            break;
+            case 'c':
+                numClusters = atol(optarg);
+                break;
+            case 't':
+                threshold = atof(optarg);
+                break;
+            case 'l':
+                loop_threshold = atol(optarg);
+                break;
+            case 's':
+                dataset_size = atof(optarg);
+                break;
+            case 'n':
+                numCoords = atol(optarg);
+                break;
+            case 'd':
+                _debug = 1;
+                break;
+            case 'h':
+            default:
+                usage(argv[0]);
+                break;
         }
     }
     if (numClusters <= 1) {
@@ -78,18 +76,23 @@ int main(int argc, char **argv)
     numObjs = (dataset_size * 1024 * 1024) / (numCoords * sizeof(double));
 
     if (numObjs < numClusters) {
-        printf("Error: number of clusters must be larger than the number of data points to be clustered.\n");
+        printf("Error: number of clusters must be larger than the number of data points to be "
+               "clustered.\n");
         return 1;
     }
-    LOG("dataset_size = %.2f MB    numObjs = %ld    numCoords = %ld    numClusters = %ld\n", dataset_size, numObjs, numCoords, numClusters);
+    LOG("dataset_size = %.2f MB    numObjs = %ld    numCoords = %ld    numClusters = %ld\n",
+        dataset_size,
+        numObjs,
+        numCoords,
+        numClusters);
 
     io_timing_read = wtime();
-    objects = dataset_generation(numObjs, numCoords);
+    objects        = dataset_generation(numObjs, numCoords);
     io_timing_read = wtime() - io_timing_read;
     // printf("I/O completed: %10.4f\n", io_timing_read);
 
     // Allocate space for clusters (coordinates of cluster centers)
-    clusters = (double *)malloc(numClusters * numCoords * sizeof(double));
+    clusters = (double*)malloc(numClusters * numCoords * sizeof(double));
 
     // The first numClusters elements are selected as initial centers
     for (i = 0; i < numClusters; i++)
@@ -113,11 +116,12 @@ int main(int argc, char **argv)
     }
 
     // membership: the cluster id for each data object
-    membership = (int *)malloc(numObjs * sizeof(int));
+    membership = (int*)malloc(numObjs * sizeof(int));
 
     // start the core computation
     LOG("\n");
-    kmeans(objects, numCoords, numObjs, numClusters, threshold, loop_threshold, membership, clusters);
+    kmeans(
+      objects, numCoords, numObjs, numClusters, threshold, loop_threshold, membership, clusters);
     LOG("\n");
 
     LOG("Final cluster centers:\n");

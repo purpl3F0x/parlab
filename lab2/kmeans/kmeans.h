@@ -3,27 +3,39 @@
 
 #include <assert.h>
 
+// clanf-format off
 #ifndef _NO_LOG
-    #define LOG(...)                                                                                                                                 \
-        do {                                                                                                                                         \
-            fprintf(stderr, __VA_ARGS__);                                                                                                            \
+    #define LOG(...)                                                                               \
+        do {                                                                                       \
+            fprintf(stderr, __VA_ARGS__);                                                          \
         } while (0);
 
-    #define LOG_FLUSH()                                                                                                                              \
-        {                                                                                                                                            \
-            fflush(stderr);                                                                                                                          \
+    #define LOG_FLUSH()                                                                            \
+        {                                                                                          \
+            fflush(stderr);                                                                        \
         }
-
 #else
-    #define LOG(...) {}
-    #define LOG_FLUSH() {}
+    #define LOG(...)                                                                               \
+        {                                                                                          \
+        }
+    #define LOG_FLUSH()                                                                            \
+        {                                                                                          \
+        }
 #endif
+// clang-format on
 
-void kmeans(double *objects, int numCoords, int numObjs, int numClusters, double threshold, long loop_threshold, int *membership, double *clusters);
+void kmeans(double* objects,
+            int     numCoords,
+            int     numObjs,
+            int     numClusters,
+            double  threshold,
+            long    loop_threshold,
+            int*    membership,
+            double* clusters);
 
-double *dataset_generation(int numObjs, int numCoords);
+double* dataset_generation(int numObjs, int numCoords);
 
-int check_repeated_clusters(int, int, double *);
+int check_repeated_clusters(int, int, double*);
 
 double wtime(void);
 

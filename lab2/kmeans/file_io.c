@@ -1,7 +1,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>    /* strtok() */
+#include <string.h> /* strtok() */
 #include <sys/stat.h>
 #include <sys/types.h> /* open() */
 #include <unistd.h>    /* read(), close() */
@@ -17,9 +17,8 @@ const char numa_aware[] = "NUMA-Aware";
 const char numa_aware[] = "Non-NUMA-Aware";
 #endif
 
-double *dataset_generation(int numObjs, int numCoords)
-{
-    double *objects = NULL;
+double* dataset_generation(int numObjs, int numCoords) {
+    double* objects = NULL;
     long    i, j;
     // Random values that will be generated will be between 0 and 10.
     double val_range = 10;

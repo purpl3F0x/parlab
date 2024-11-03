@@ -84,9 +84,11 @@ df_melted = df.melt(
     var_name="Bind",
     value_name="time",
 )
-df_melted['Bind'] = df_melted['Bind'].replace({'loop_time': 'Without', 'bind_loop_time': 'With'})
+df_melted["Bind"] = df_melted["Bind"].replace(
+    {"loop_time": "Without", "bind_loop_time": "With"}
+)
 
-sns.barplot(x='threads', y='time', hue='Bind', data=df_melted)
+sns.barplot(x="threads", y="time", hue="Bind", data=df_melted)
 plt.xlabel("Number of threads")
 plt.ylabel("Time (s)")
 plt.title("Comparison of With and Without Binding")
@@ -94,7 +96,7 @@ plt.savefig("./plots/naive_bind.svg")
 plt.close()
 
 # plot the difference of bind and non-bind
-df['diff'] = df['loop_time'] - df['bind_loop_time']
+df["diff"] = df["loop_time"] - df["bind_loop_time"]
 
 sns.barplot(data=df, x="threads", y="diff", color=next(bmh_colors))
 plt.xlabel("Number of threads")
