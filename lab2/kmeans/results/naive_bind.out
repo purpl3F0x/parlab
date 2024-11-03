@@ -1,0 +1,7 @@
+nthreads =  1, nloops =  10, total = 15.3681s, per loop =  1.5368s
+nthreads =  2, nloops =  10, total =  9.9412s, per loop =  0.9941s
+nthreads =  4, nloops =  10, total =  5.6301s, per loop =  0.5630s
+nthreads =  8, nloops =  10, total =  3.7302s, per loop =  0.3730s
+nthreads = 16, nloops =  10, total =  6.7537s, per loop =  0.6754s
+nthreads = 32, nloops =  10, total =  9.6305s, per loop =  0.9631s
+nthreads = 64, nloops =  10, total =  7.3625s, per loop =  0.7363s
