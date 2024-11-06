@@ -7,13 +7,13 @@
 #PBS -o run_kmeans_reduction.out
 #PBS -e run_kmeans_reduction.err
 
-## How many machines should we get? 
+## How many machines should we get?
 #PBS -l nodes=1:ppn=64
 
 ##How long should the job run for?
 #PBS -l walltime=01:00:00
 
-## Start 
+## Start
 ## Run make in the src folder (modify properly)
 
 module load openmp
@@ -55,4 +55,15 @@ for i in 1 2 4 8 16 32 64
 do
     export  OMP_NUM_THREADS=$i
     ./kmeans_omp_reduction -s $SIZE -n $COORDS -c $CLUSTERS -l $LOOPS 1>>./results/reduction_small.out
+done
+
+
+# Run reduction with numa aware io
+
+./kmeans_seq -s $SIZE -n $COORDS -c $CLUSTERS -l $LOOPS 1>>./results/reduction.out
+
+for i in 1 2 4 8 16 32 64
+do
+    export  OMP_NUM_THREADS=$i
+    ./kmeans_omp_reduction_numa_aware_io -s $SIZE -n $COORDS -c $CLUSTERS -l $LOOPS 1>>./results/reduction_small.out
 done

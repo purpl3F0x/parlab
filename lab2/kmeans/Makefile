@@ -7,19 +7,22 @@ LDFLAGS =
 H_FILES = kmeans.h
 COMM_SRC = file_io.c util.c
 
-_NUMA_AWARE ?= 0
-ifeq ($(_NUMA_AWARE), 1)
-	OMPFLAGS += -D_NUMA_AWARE
-endif
+# _NUMA_AWARE ?= 0
+# ifeq ($(_NUMA_AWARE), 1)
+# 	OMPFLAGS += -D_NUMA_AWARE
+# endif
 
 # all: kmeans_seq
-all: kmeans_seq kmeans_omp_naive kmeans_omp_reduction
+all: kmeans_seq kmeans_omp_naive kmeans_omp_reduction kmeans_omp_reduction_numa_aware_io
 
 kmeans_seq: main.o file_io.o util.o seq_kmeans.o
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
-kmeans_omp_naive: main.o file_io_omp.o util.o omp_naive_kmeans.o
+kmeans_omp_naive: main.o file_io.o util.o omp_naive_kmeans.o
 	$(CC) $(OMPFLAGS) $^ -o $@ $(LDFLAGS)
-kmeans_omp_reduction: main.o file_io_omp.o util.o omp_reduction_kmeans.o
+kmeans_omp_reduction: main.o file_io.o util.o omp_reduction_kmeans.o
+	$(CC) $(OMPFLAGS) $^ -o $@ $(LDFLAGS)
+
+kmeans_omp_reduction_numa_aware_io: main.o file_io_omp.o util.o omp_reduction_kmeans_omp.o
 	$(CC) $(OMPFLAGS) $^ -o $@ $(LDFLAGS)
 
 
@@ -33,8 +36,11 @@ omp_naive_kmeans.o: omp_naive_kmeans.c $(COMM_SRC) $(H_FILES)
 omp_reduction_kmeans.o: omp_reduction_kmeans.c $(COMM_SRC) $(H_FILES)
 	$(CC) $(OMPFLAGS) -c $< -o $@
 
-file_io_omp.o: file_io.c
+omp_reduction_kmeans_omp.o: omp_reduction_kmeans.c $(COMM_SRC) $(H_FILES)
 	$(CC) $(OMPFLAGS) -c $< -o $@
+
+file_io_omp.o: file_io.c
+	$(CC) $(OMPFLAGS) -D_NUMA_AWARE -c $< -o $@
 
 file_io.o: file_io.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -45,4 +51,4 @@ util.o: util.c
 dep: $(_NUMA_AWARE)
 
 clean:
-	rm -rf *.o kmeans_seq kmeans_omp_naive kmeans_omp_reduction
+	rm -rf *.o kmeans_seq kmeans_omp_naive kmeans_omp_reduction kmeans_omp_reduction_numa_aware_io
