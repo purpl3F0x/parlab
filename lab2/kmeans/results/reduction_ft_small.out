@@ -1,0 +1,7 @@
+nthreads =  1, nloops =  10, total =  6.4879s, per loop =  0.6488s, numa = Non-NUMA-Aware
+nthreads =  2, nloops =  10, total =  3.2637s, per loop =  0.3264s, numa = Non-NUMA-Aware
+nthreads =  4, nloops =  10, total =  1.7027s, per loop =  0.1703s, numa = Non-NUMA-Aware
+nthreads =  8, nloops =  10, total =  1.1089s, per loop =  0.1109s, numa = Non-NUMA-Aware
+nthreads = 16, nloops =  10, total =  0.5880s, per loop =  0.0588s, numa = Non-NUMA-Aware
+nthreads = 32, nloops =  10, total =  0.4662s, per loop =  0.0466s, numa = Non-NUMA-Aware
+nthreads = 64, nloops =  10, total =  0.4648s, per loop =  0.0465s, numa = Non-NUMA-Aware

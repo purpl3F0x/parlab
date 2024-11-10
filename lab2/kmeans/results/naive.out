@@ -1,7 +1,8 @@
-nthreads =  1, nloops =  10, total = 14.9373s, per loop =  1.4937s
-nthreads =  2, nloops =  10, total = 13.4197s, per loop =  1.3420s
-nthreads =  4, nloops =  10, total =  9.6952s, per loop =  0.9695s
-nthreads =  8, nloops =  10, total =  7.0225s, per loop =  0.7023s
-nthreads = 16, nloops =  10, total =  5.9310s, per loop =  0.5931s
-nthreads = 32, nloops =  10, total =  5.6988s, per loop =  0.5699s
-nthreads = 64, nloops =  10, total =  5.8759s, per loop =  0.5876s
+nthreads = sequential, nloops =  10, total = 14.9346s, per loop =  1.4935s
+nthreads =  1, nloops =  10, total = 17.2497s, per loop =  1.7250s
+nthreads =  2, nloops =  10, total = 13.3476s, per loop =  1.3348s
+nthreads =  4, nloops =  10, total =  9.6028s, per loop =  0.9603s
+nthreads =  8, nloops =  10, total =  6.9375s, per loop =  0.6937s
+nthreads = 16, nloops =  10, total =  5.9588s, per loop =  0.5959s
+nthreads = 32, nloops =  10, total =  5.4837s, per loop =  0.5484s
+nthreads = 64, nloops =  10, total =  5.7853s, per loop =  0.5785s
