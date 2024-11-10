@@ -129,7 +129,7 @@ df["diff"] = df["loop_time"] - df["bind_loop_time"]
 sns.barplot(data=df, x="threads", y="diff", color=next(bmh_colors))
 plt.xlabel("Number of threads")
 plt.ylabel("Time (s) - Per Loop")
-plt.title("Difference between With and Without Binding")
+plt.title("Difference between With and Without GOMP_CPU_AFFINITY")
 plt.savefig("./plots/naive_bind_diff.svg")
 plt.close()
 
