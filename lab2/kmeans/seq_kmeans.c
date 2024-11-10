@@ -121,7 +121,7 @@ void kmeans(double* objects,        /* in: [numObjs][numCoords] */
     } while (delta > threshold && loop < loop_threshold);
 
     timing = wtime() - timing;
-    printf("nthreads =  1, nloops = %3d, total = %7.4fs, per loop = %7.4fs\n",
+    printf("nthreads = sequential, nloops = %3d, total = %7.4fs, per loop = %7.4fs\n",
            loop,
            timing,
            timing / loop);
