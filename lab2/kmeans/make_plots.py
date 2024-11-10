@@ -71,7 +71,7 @@ print(df)
 fig, axs = plt.subplots(1, 2, figsize=(14, 7))
 sns.barplot(data=df, x="threads", y="loop_time", color=next(bmh_colors), ax=axs[0])
 axs[0].set_xlabel("Number of threads")
-axs[0].set_ylabel("Time (s)")
+axs[0].set_ylabel("Time (s) - Per Loop")
 axs[0].set_title("Naive K-means")
 
 sns.lineplot(data=df, x="threads", y="speedup", ax=axs[1])
@@ -100,7 +100,7 @@ fig, axs = plt.subplots(1, 2, figsize=(14, 7))
 
 sns.barplot(x="threads", y="time", hue="Bind", data=df_melted, ax=axs[0])
 axs[0].set_xlabel("Number of threads")
-axs[0].set_ylabel("Time (s)")
+axs[0].set_ylabel("Time (s) - Per Loop")
 axs[0].set_title("Time")
 
 df_melted = df.melt(
