@@ -3,7 +3,7 @@
 all: fw fw_sr fw_tiled 
 
 CC=gcc
-CFLAGS= -Wall -Wextra -O2 -march=native -ffast-math
+CFLAGS= -Wall -Wextra -O2 -ffast-math -march=native
 
 HDEPS+=%.h
 
