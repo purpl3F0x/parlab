@@ -15,7 +15,7 @@ if not os.path.exists("./plots"):
 # Set the style of the plots
 sns.set_theme(style="whitegrid")
 plt.style.use("bmh")
-# plt.rcParams["font.family"] = "Cambria"
+plt.rcParams["font.family"] = "Cambria"
 plt.rcParams["font.size"] = 12
 bmh_colors = iter(plt.rcParams["axes.prop_cycle"].by_key()["color"])
 
