@@ -38,7 +38,7 @@ double* dataset_generation(int numObjs, int numCoords) {
         // clang-format off
 		#if  defined(_OPENMP) && defined(_NUMA_AWARE)
 			#pragma message "NUMA-Aware dataset generation"
-			#pragma omp parallel for schedule(static)
+			#pragma omp parallel for schedule(static) private(j)
 		#endif
         // clang-format on
         for (j = 0; j < numCoords; j++) {
