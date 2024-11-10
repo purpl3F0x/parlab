@@ -128,7 +128,7 @@ df["diff"] = df["loop_time"] - df["bind_loop_time"]
 
 sns.barplot(data=df, x="threads", y="diff", color=next(bmh_colors))
 plt.xlabel("Number of threads")
-plt.ylabel("Time (s)")
+plt.ylabel("Time (s) - Per Loop")
 plt.title("Difference between With and Without Binding")
 plt.savefig("./plots/naive_bind_diff.svg")
 plt.close()
@@ -162,7 +162,7 @@ fig, axs = plt.subplots(1, 2, figsize=(14, 7))
 
 sns.barplot(data=df, x="threads", y="loop_time", ax=axs[0])
 axs[0].set_xlabel("Number of threads")
-axs[0].set_ylabel("Time (s)")
+axs[0].set_ylabel("Time (s) - Per Loop")
 axs[0].set_title("Reduction K-means")
 
 sns.lineplot(data=df, x="threads", y="speedup", ax=axs[1])
@@ -298,7 +298,7 @@ print(df1)
 fig, axs = plt.subplots(1, 2, figsize=(14, 7))
 sns.barplot(x="threads", y="time", hue="NUMA", data=df1, ax=axs[0])
 axs[0].set_xlabel("Number of threads")
-axs[0].set_ylabel("Time (s)")
+axs[0].set_ylabel("Time (s) - Per Loop")
 axs[0].set_title("Time")
 
 sns.lineplot(x="threads", y="speedup", hue="NUMA", data=df2, ax=axs[1])
