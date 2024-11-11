@@ -96,9 +96,9 @@ void FW_SR(int** A,
      * The base case (when recursion stops) is not allowed to be edited!
      * What you can do is try different block sizes.
      */
-    if (myN <= 256) {
-        for (k = 0; k < 256; k++)
-            for (i = 0; i < 256; i++)
+    if (myN <= B) {
+        for (k = 0; k < B; k++)
+            for (i = 0; i < B; i++)
                 for (j = 0; j < myN; j++) {
                     A[arow + i][acol + j] =
                       min(A[arow + i][acol + j], B[brow + i][bcol + k] + C[crow + k][ccol + j]);
