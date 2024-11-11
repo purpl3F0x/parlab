@@ -55,7 +55,10 @@ int main(int argc, char** argv) {
     omp_set_nested(1);
 
     gettimeofday(&t1, 0);
+#pragma omp parallel
+#pragma omp single
     FW_SR(A, 0, 0, A, 0, 0, A, 0, 0, N, B);
+
     gettimeofday(&t2, 0);
 
     time = (double)((t2.tv_sec - t1.tv_sec) * 1000000 + t2.tv_usec - t1.tv_usec) / 1000000;
@@ -96,42 +99,36 @@ void FW_SR(int** A,
      * The base case (when recursion stops) is not allowed to be edited!
      * What you can do is try different block sizes.
      */
-    if (myN <= B) {
-        for (k = 0; k < B; k++)
-            for (i = 0; i < B; i++)
+    if (myN <= bsize) {
+        for (k = 0; k < myN; k++)
+            for (i = 0; i < myN; i++)
                 for (j = 0; j < myN; j++) {
                     A[arow + i][acol + j] =
                       min(A[arow + i][acol + j], B[brow + i][bcol + k] + C[crow + k][ccol + j]);
                 }
     } else {
         // clang-format off
+        FW_SR(A, arow, acol, B, brow, bcol, C, crow, ccol, myN / 2, bsize);
 
-        #pragma omp parallel
-        {
-            #pragma omp single
-            {
-                FW_SR(A, arow, acol, B, brow, bcol, C, crow, ccol, myN / 2, bsize);
+        #pragma omp task
+        FW_SR(A, arow, acol + myN / 2, B, brow, bcol, C, crow, ccol + myN / 2, myN / 2, bsize);
+        #pragma omp task if (0)
+        FW_SR(A, arow + myN / 2, acol, B, brow + myN / 2, bcol, C, crow, ccol, myN / 2, bsize);
 
-                #pragma omp task
-                FW_SR(A, arow, acol + myN / 2, B, brow, bcol, C, crow, ccol + myN / 2, myN / 2, bsize);
-                #pragma omp task if (0)
-                FW_SR(A, arow + myN / 2, acol, B, brow + myN / 2, bcol, C, crow, ccol, myN / 2, bsize);
+        #pragma omp taskwait
 
-                #pragma omp taskwait
+        FW_SR(A, arow + myN / 2, acol + myN / 2, B, brow + myN / 2, bcol, C, crow, ccol + myN / 2, myN / 2, bsize);
+        FW_SR(A, arow + myN / 2, acol + myN / 2, B, brow + myN / 2, bcol + myN / 2, C, crow + myN / 2, ccol + myN / 2, myN / 2, bsize);
 
-                FW_SR(A, arow + myN / 2, acol + myN / 2, B, brow + myN / 2, bcol, C, crow, ccol + myN / 2, myN / 2, bsize);
-                FW_SR(A, arow + myN / 2, acol + myN / 2, B, brow + myN / 2, bcol + myN / 2, C, crow + myN / 2, ccol + myN / 2, myN / 2, bsize);
+        #pragma omp task
+        FW_SR(A, arow + myN / 2, acol, B, brow + myN / 2, bcol + myN / 2, C, crow + myN / 2, ccol, myN / 2, bsize);
+        #pragma omp task if (0)
+        FW_SR(A, arow, acol + myN / 2, B, brow, bcol + myN / 2, C, crow + myN / 2, ccol + myN / 2, myN / 2, bsize);
 
-                #pragma omp task
-                FW_SR(A, arow + myN / 2, acol, B, brow + myN / 2, bcol + myN / 2, C, crow + myN / 2, ccol, myN / 2, bsize);
-                #pragma omp task if (0)
-                FW_SR(A, arow, acol + myN / 2, B, brow, bcol + myN / 2, C, crow + myN / 2, ccol + myN / 2, myN / 2, bsize);
+        #pragma omp taskwait
+        
+        FW_SR(A, arow, acol, B, brow, bcol + myN / 2, C, crow + myN / 2, ccol, myN / 2, bsize);
 
-                #pragma omp taskwait
-                
-                FW_SR(A, arow, acol, B, brow, bcol + myN / 2, C, crow + myN / 2, ccol, myN / 2, bsize);
-            }
-        }
     }
     // clang-format on
 }
