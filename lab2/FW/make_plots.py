@@ -3,6 +3,9 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+# Define the custom color palette
+colors = ["#348ABD", "#A60628", "#7A68A6", "#467821", "#D55E00", "#CC79A7"]
+
 # Set the style of the plots
 sns.set_theme(style="whitegrid")
 plt.style.use("bmh")
@@ -19,9 +22,9 @@ fw_seq = pd.read_csv(os.path.join(METRICS_FOLDER, "fw_seq.csv")).rename(columns=
 fw_sr = pd.read_csv(os.path.join(METRICS_FOLDER, "fw_sr.csv")).rename(columns=lambda x: x.strip())
 fw_tiled = pd.read_csv(os.path.join(METRICS_FOLDER, "fw_tiled.csv")).rename(columns=lambda x: x.strip())
 
-# Plot 1: Sequential Floyd-Warshall Edition (single bar color: steelblue)
+# Plot 1: Sequential Floyd-Warshall Edition (single bar color)
 plt.figure(figsize=(14, 7))
-sns.barplot(data=fw_seq, x="BATCH_SIZE", y="TIME", color="steelblue")
+sns.barplot(data=fw_seq, x="BATCH_SIZE", y="TIME", color=colors[0])  # Apply first color in palette
 plt.title("Sequential Floyd-Warshall Edition", fontsize=16)  # Increase title font size
 plt.xlabel("Batch Size", fontsize=14)  # Increase xlabel font size
 plt.ylabel("Time (s)", fontsize=14)  # Increase ylabel font size
@@ -48,15 +51,13 @@ for batch_size in fw_sr["BATCH_SIZE"].unique():
     # Append the sequential data to the subset
     subset = pd.concat([seq_data, subset], ignore_index=True)
     
-    # Use steelblue if only one bar group; otherwise, Dark2 for hue
-    color = "steelblue" if subset["TILE_SIZE"].nunique() == 1 else None
-    palette = "Dark2" if color is None else None
-    sns.barplot(data=subset, x="Thread_Label", y="TIME", hue="TILE_SIZE", palette=palette, color=color)
+    # Use colors from palette for hue
+    sns.barplot(data=subset, x="Thread_Label", y="TIME", hue="TILE_SIZE", palette=colors)
     
     plt.title(f"Recursive Floyd-Warshall Edition (Batch Size {batch_size})", fontsize=16)  # Increase title font size
     plt.xlabel("Threads", fontsize=14)  # Increase xlabel font size
     plt.ylabel("Time (s)", fontsize=14)  # Increase ylabel font size
-    plt.legend(title="Tile Size", loc='center left', bbox_to_anchor=(1, 0.5), fontsize=12) if palette else None  # Legend font size
+    plt.legend(title="Tile Size", loc='center left', bbox_to_anchor=(1, 0.5), fontsize=12)  # Legend font size
     plt.tick_params(axis='both', which='major', labelsize=12)  # Increase tick label size
     plt.savefig(os.path.join(PLOTS_FOLDER, f"Recursive_Floyd_Warshall_Batch_{batch_size}.svg"), format="svg")
     plt.close()
@@ -80,15 +81,13 @@ for batch_size in fw_tiled["BATCH_SIZE"].unique():
     # Append the sequential data to the subset
     subset = pd.concat([seq_data, subset], ignore_index=True)
     
-    # Use steelblue for single color or Dark2 if multiple hues
-    color = "steelblue" if subset["TILE_SIZE"].nunique() == 1 else None
-    palette = "Dark2" if color is None else None
-    sns.barplot(data=subset, x="Thread_Label", y="TIME", hue="TILE_SIZE", palette=palette, color=color)
+    # Use colors from palette for hue
+    sns.barplot(data=subset, x="Thread_Label", y="TIME", hue="TILE_SIZE", palette=colors)
     
     plt.title(f"Tiled Floyd-Warshall Edition (Batch Size {batch_size})", fontsize=16)  # Increase title font size
     plt.xlabel("Threads", fontsize=14)  # Increase xlabel font size
     plt.ylabel("Time (s)", fontsize=14)  # Increase ylabel font size
-    plt.legend(title="Tile Size", loc='center left', bbox_to_anchor=(1, 0.5), fontsize=12) if palette else None  # Legend font size
+    plt.legend(title="Tile Size", loc='center left', bbox_to_anchor=(1, 0.5), fontsize=12)  # Legend font size
     plt.tick_params(axis='both', which='major', labelsize=12)  # Increase tick label size
     plt.savefig(os.path.join(PLOTS_FOLDER, f"Tiled_Floyd_Warshall_Batch_{batch_size}.svg"), format="svg")
     plt.close()
