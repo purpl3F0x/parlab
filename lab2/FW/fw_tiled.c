@@ -189,7 +189,7 @@ void FW_SSE(int** A, int K, int I, int J, int N) {
              *      - loadu:    Latency = 3 cycles, CPI = 0.5 cycles
              *      - add:      Latency = 1 cycle, CPI = 0.5 cycles
              *      - min:      Latency = 1 cycle, CPI = 0.5 cycles
-             *      - storeu:   Latency = 1 cycles, CPI = 0.5 cycles
+             *      - storeu:   Latency = 3 cycles, CPI = 1 cycles
              *
              * So in order to achieve max throughput, we need to unroll the loop by 6, to keep both
              * Vector Units busy. We will unroll by 4, to be on multiples of 2. x8 hurts is worse
