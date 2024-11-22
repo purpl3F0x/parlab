@@ -18,4 +18,4 @@
 
 module load openmp
 cd /home/parallel/parlab17/a2/FW
-make
+make clean && make
