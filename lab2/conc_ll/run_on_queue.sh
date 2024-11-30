@@ -21,7 +21,7 @@ cd /home/parallel/parlab17/a2/conc_ll
 THREADS=(1 2 4 8 16 32 64 128)
 LIST_SIZES=(1024 8192)
 CONTAINS=("100 0 0" "80 10 10" "20 40 40" "0 50 50")
-TOTAL_CORES=32
+TOTAL_CORES=64
 
 mkdir -p ./results
 

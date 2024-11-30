@@ -1,128 +1,128 @@
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 739.80
+Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 739.50
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 93.37
+Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 93.34
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 1050.99
+Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 1050.92
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 62.18
+Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 62.98
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 998.02
+Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 997.91
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 60.53
+Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 60.83
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 981.25
+Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 985.07
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 61.40
+Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 60.86
 MT_CONF=0,1
-Nthreads: 2  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 1467.89
+Nthreads: 2  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 1468.34
 MT_CONF=0,1
-Nthreads: 2  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 185.36
+Nthreads: 2  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 185.37
 MT_CONF=0,1
-Nthreads: 2  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 1401.71
+Nthreads: 2  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 1405.49
 MT_CONF=0,1
-Nthreads: 2  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 123.24
+Nthreads: 2  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 123.53
 MT_CONF=0,1
-Nthreads: 2  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 1284.20
+Nthreads: 2  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 1281.23
 MT_CONF=0,1
-Nthreads: 2  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 120.77
+Nthreads: 2  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 118.77
 MT_CONF=0,1
-Nthreads: 2  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 1254.67
+Nthreads: 2  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 1253.96
 MT_CONF=0,1
-Nthreads: 2  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 119.15
+Nthreads: 2  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 119.19
 MT_CONF=0,1,2,3
-Nthreads: 4  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 2822.22
+Nthreads: 4  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 2742.96
 MT_CONF=0,1,2,3
-Nthreads: 4  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 356.36
+Nthreads: 4  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 356.55
 MT_CONF=0,1,2,3
-Nthreads: 4  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 1365.96
+Nthreads: 4  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 1369.08
 MT_CONF=0,1,2,3
-Nthreads: 4  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 232.24
+Nthreads: 4  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 229.69
 MT_CONF=0,1,2,3
-Nthreads: 4  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 1285.71
+Nthreads: 4  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 1286.28
 MT_CONF=0,1,2,3
-Nthreads: 4  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 226.87
+Nthreads: 4  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 227.01
 MT_CONF=0,1,2,3
-Nthreads: 4  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 1265.23
+Nthreads: 4  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 1264.71
 MT_CONF=0,1,2,3
-Nthreads: 4  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 225.18
+Nthreads: 4  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 225.68
 MT_CONF=0,1,2,3,4,5,6,7
-Nthreads: 8  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 5215.71
+Nthreads: 8  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 5162.52
 MT_CONF=0,1,2,3,4,5,6,7
-Nthreads: 8  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 659.93
+Nthreads: 8  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 660.02
 MT_CONF=0,1,2,3,4,5,6,7
-Nthreads: 8  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 1922.20
+Nthreads: 8  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 1916.20
 MT_CONF=0,1,2,3,4,5,6,7
-Nthreads: 8  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 322.55
+Nthreads: 8  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 326.07
 MT_CONF=0,1,2,3,4,5,6,7
-Nthreads: 8  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 1799.29
+Nthreads: 8  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 1799.22
 MT_CONF=0,1,2,3,4,5,6,7
-Nthreads: 8  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 335.88
+Nthreads: 8  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 336.32
 MT_CONF=0,1,2,3,4,5,6,7
-Nthreads: 8  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 1763.57
+Nthreads: 8  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 1767.91
 MT_CONF=0,1,2,3,4,5,6,7
-Nthreads: 8  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 337.74
+Nthreads: 8  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 337.01
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-Nthreads: 16  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 7350.74
+Nthreads: 16  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 8969.55
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-Nthreads: 16  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 1317.67
+Nthreads: 16  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 1317.95
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-Nthreads: 16  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 1475.40
+Nthreads: 16  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 1487.97
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-Nthreads: 16  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 494.73
+Nthreads: 16  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 492.09
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-Nthreads: 16  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 1262.09
+Nthreads: 16  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 1271.28
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-Nthreads: 16  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 514.66
+Nthreads: 16  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 519.80
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-Nthreads: 16  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 1223.66
+Nthreads: 16  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 1231.89
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-Nthreads: 16  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 507.78
+Nthreads: 16  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 485.11
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 32  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 11015.14
+Nthreads: 32  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 10794.34
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 32  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 2631.05
+Nthreads: 32  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 2633.85
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 32  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 6239.15
+Nthreads: 32  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 6163.31
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 32  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 855.92
+Nthreads: 32  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 852.35
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 32  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 4756.93
+Nthreads: 32  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 4734.46
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 32  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 840.61
+Nthreads: 32  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 852.28
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 32  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 4438.89
+Nthreads: 32  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 4475.00
 MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 32  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 815.96
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 64  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 8981.21
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 64  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 2631.88
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 64  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 3973.32
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 64  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 695.87
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 64  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 2530.68
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 64  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 678.64
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 64  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 2416.11
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 64  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 682.80
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 128  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 13548.42
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 128  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 2633.73
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 128  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 5298.00
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 128  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 474.64
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 128  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 2830.48
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 128  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 486.07
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 128  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 2566.47
-MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-Nthreads: 128  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 482.88
+Nthreads: 32  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 810.52
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 64  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 30009.59
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 64  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 4969.66
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 64  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 9215.05
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 64  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 856.44
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 64  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 8276.53
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 64  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 985.82
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 64  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 7677.12
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 64  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 972.63
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 128  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 9051.43
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 128  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 5001.22
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 128  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 6689.38
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 128  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 570.52
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 128  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 4961.75
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 128  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 613.63
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 128  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 4334.22
+MT_CONF=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+Nthreads: 128  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 628.59

@@ -1,16 +1,16 @@
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 1576.52
+Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 100/0/0  Throughput(Kops/sec): 1576.20
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 152.51
+Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 100/0/0  Throughput(Kops/sec): 152.07
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 2060.87
+Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 80/10/10  Throughput(Kops/sec): 2061.31
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 75.49
+Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 80/10/10  Throughput(Kops/sec): 74.49
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 1616.79
+Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 20/40/40  Throughput(Kops/sec): 1617.04
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 86.45
+Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 20/40/40  Throughput(Kops/sec): 86.18
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 1517.62
+Nthreads: 1  Runtime(sec): 10  ListSize: 1024  Workload: 0/50/50  Throughput(Kops/sec): 1516.99
 MT_CONF=0
-Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 91.42
+Nthreads: 1  Runtime(sec): 10  ListSize: 8192  Workload: 0/50/50  Throughput(Kops/sec): 91.65
