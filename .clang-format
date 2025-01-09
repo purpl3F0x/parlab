@@ -2,6 +2,7 @@ BasedOnStyle: Mozilla
 AlignConsecutiveAssignments: 'true'
 AlignConsecutiveDeclarations: 'true'
 AlignConsecutiveMacros: 'true'
+AlignTrailingComments: 'true'
 AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakAfterReturnType: None
 AlwaysBreakTemplateDeclarations: No
@@ -17,3 +18,6 @@ TabWidth: 4
 BreakBeforeBraces: 'Custom'
 IndentExternBlock: 'false'
 IndentPPDirectives: BeforeHash
+
+ReflowComments: false
+PenaltyBreakComment: 300
