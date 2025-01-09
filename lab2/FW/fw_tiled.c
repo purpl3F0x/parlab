@@ -43,9 +43,9 @@ int main(int argc, char** argv) {
     N = atoi(argv[1]);
     B = atoi(argv[2]);
 
-    A = (int**)malloc(N * sizeof(int*));
+    A = (int**)aligned_alloc(128, N * sizeof(int*));
     for (i = 0; i < N; i++) {
-        A[i] = (int*)malloc(N * sizeof(int));
+        A[i] = (int*)aligned_alloc(128, N * sizeof(int));
     }
 
     graph_init_random(A, -1, N, 128 * N);
@@ -56,53 +56,49 @@ int main(int argc, char** argv) {
 
     gettimeofday(&t1, 0);
 
+    // clang-format off
     for (k = 0; k < N; k += B) {
         FW(A, k, k, k, B);
 
-        // clang-format off
-            #pragma omp parallel default (none) shared(A, N, B, k) private(i, j)
-            {
+        #pragma omp parallel for schedule(dynamic) private(i)
+        for (i = 0; i < k; i += B)
+            FW(A, k, i, k, B);
 
-                #pragma omp for private(i)  schedule(static) nowait
-                for (i = 0; i < k; i += B)
-                    FW(A, k, i, k, B);
+        #pragma omp parallel for schedule(dynamic) private(i)
+        for (i = k + B; i < N; i += B)
+            FW(A, k, i, k, B);
 
-                #pragma omp for private(i) schedule(static) nowait
-                for (i = k + B; i < N; i += B)
-                    FW(A, k, i, k, B);
+        #pragma omp parallel for schedule(dynamic) private(j)
+        for (j = 0; j < k; j += B)
+            FW(A, k, k, j, B);
 
-                #pragma omp for private(j) schedule(static) nowait
-                for (j = 0; j < k; j += B)
-                    FW(A, k, k, j, B);
+        #pragma omp parallel for schedule(dynamic) private(j)
+        for (j = k + B; j < N; j += B)
+            FW(A, k, k, j, B);
 
-                #pragma omp for private(j) schedule(static) nowait
-                for (j = k + B; j < N; j += B)
-                    FW(A, k, k, j, B);
+        #pragma omp barrier
 
-                #pragma omp taskwait
+        #pragma omp parallel for schedule(dynamic) private(i, j)
+        for (i = 0; i < k; i += B)
+            for (j = 0; j < k; j += B)
+                FW(A, k, i, j, B);
 
-                #pragma omp for private(i, j) collapse(2) schedule(static) nowait
-                for (i = 0; i < k; i += B)
-                    for (j = 0; j < k; j += B)
-                        FW(A, k, i, j, B);
+        #pragma omp parallel for schedule(dynamic) private(i, j)
+        for (i = 0; i < k; i += B)
+            for (j = k + B; j < N; j += B)
+                FW(A, k, i, j, B);
 
-                #pragma omp for private(i, j) collapse(2) schedule(static) nowait
-                for (i = 0; i < k; i += B)
-                    for (j = k + B; j < N; j += B)
-                        FW(A, k, i, j, B);
+        #pragma omp parallel for schedule(dynamic) private(i, j)
+        for (i = k + B; i < N; i += B)
+            for (j = 0; j < k; j += B)
+                FW(A, k, i, j, B);
 
-                #pragma omp for private(i, j) collapse(2) schedule(static)  nowait
-                for (i = k + B; i < N; i += B)
-                    for (j = 0; j < k; j += B)
-                        FW(A, k, i, j, B);
+        #pragma omp parallel for schedule(dynamic) private(i, j)
+        for (i = k + B; i < N; i += B)
+            for (j = k + B; j < N; j += B)
+                FW(A, k, i, j, B);
 
-                #pragma omp for private(i, j) collapse(2) schedule(static) nowait
-                for (i = k + B; i < N; i += B)
-                    for (j = k + B; j < N; j += B)
-                        FW(A, k, i, j, B);
-
-                #pragma omp taskwait
-            }
+        #pragma omp barrier
         }
     // clang-format on
 
@@ -186,10 +182,10 @@ void FW_SSE(int** A, int K, int I, int J, int N) {
 
             /*
              * Targeting Sandy-Bridge:
-             *      - loadu:    Latency = 3 cycles, CPI = 0.5 cycles
+             *      - load:    Latency = 3 cycles, CPI = 0.5 cycles
              *      - add:      Latency = 1 cycle, CPI = 0.5 cycles
              *      - min:      Latency = 1 cycle, CPI = 0.5 cycles
-             *      - storeu:   Latency = 3 cycles, CPI = 1 cycles
+             *      - store:   Latency = 3 cycles, CPI = 1 cycles
              *
              * So in order to achieve max throughput, we need to unroll the loop by 6, to keep both
              * Vector Units busy. We will unroll by 4, to be on multiples of 2. x8 hurts is worse
@@ -199,14 +195,14 @@ void FW_SSE(int** A, int K, int I, int J, int N) {
             for (; j <= J + N - 16; j += 16) {
 
                 // Load Blocks of  A[k][j:j+31]
-                __m128i a_kj0 = _mm_loadu_si128((__m128i*)&A[k][j]);
-                __m128i a_kj1 = _mm_loadu_si128((__m128i*)&A[k][j + 4]);
-                __m128i a_kj2 = _mm_loadu_si128((__m128i*)&A[k][j + 8]);
-                __m128i a_kj3 = _mm_loadu_si128((__m128i*)&A[k][j + 12]);
-                // __m128i a_kj4 = _mm_loadu_si128((__m128i*)&A[k][j + 16]);
-                // __m128i a_kj5 = _mm_loadu_si128((__m128i*)&A[k][j + 20]);
-                // __m128i a_kj6 = _mm_loadu_si128((__m128i*)&A[k][j + 24]);
-                // __m128i a_kj7 = _mm_loadu_si128((__m128i*)&A[k][j + 28]);
+                __m128i a_kj0 = _mm_load_si128((__m128i*)&A[k][j]);
+                __m128i a_kj1 = _mm_load_si128((__m128i*)&A[k][j + 4]);
+                __m128i a_kj2 = _mm_load_si128((__m128i*)&A[k][j + 8]);
+                __m128i a_kj3 = _mm_load_si128((__m128i*)&A[k][j + 12]);
+                // __m128i a_kj4 = _mm_load_si128((__m128i*)&A[k][j + 16]);
+                // __m128i a_kj5 = _mm_load_si128((__m128i*)&A[k][j + 20]);
+                // __m128i a_kj6 = _mm_load_si128((__m128i*)&A[k][j + 24]);
+                // __m128i a_kj7 = _mm_load_si128((__m128i*)&A[k][j + 28]);
 
                 // Compute A[i][k] + A[k][j:j+16]
                 __m128i sum0 = _mm_add_epi32(a_ik, a_kj0);
@@ -219,14 +215,14 @@ void FW_SSE(int** A, int K, int I, int J, int N) {
                 // __m128i sum7 = _mm_add_epi32(a_ik, a_kj7);
 
                 // Load blocks of A[i][j:j+16]
-                __m128i a_ij0 = _mm_loadu_si128((__m128i*)&A[i][j]);
-                __m128i a_ij1 = _mm_loadu_si128((__m128i*)&A[i][j + 4]);
-                __m128i a_ij2 = _mm_loadu_si128((__m128i*)&A[i][j + 8]);
-                __m128i a_ij3 = _mm_loadu_si128((__m128i*)&A[i][j + 12]);
-                // __m128i a_ij4 = _mm_loadu_si128((__m128i*)&A[i][j + 16]);
-                // __m128i a_ij5 = _mm_loadu_si128((__m128i*)&A[i][j + 20]);
-                // __m128i a_ij6 = _mm_loadu_si128((__m128i*)&A[i][j + 24]);
-                // __m128i a_ij7 = _mm_loadu_si128((__m128i*)&A[i][j + 28]);
+                __m128i a_ij0 = _mm_load_si128((__m128i*)&A[i][j]);
+                __m128i a_ij1 = _mm_load_si128((__m128i*)&A[i][j + 4]);
+                __m128i a_ij2 = _mm_load_si128((__m128i*)&A[i][j + 8]);
+                __m128i a_ij3 = _mm_load_si128((__m128i*)&A[i][j + 12]);
+                // __m128i a_ij4 = _mm_load_si128((__m128i*)&A[i][j + 16]);
+                // __m128i a_ij5 = _mm_load_si128((__m128i*)&A[i][j + 20]);
+                // __m128i a_ij6 = _mm_load_si128((__m128i*)&A[i][j + 24]);
+                // __m128i a_ij7 = _mm_load_si128((__m128i*)&A[i][j + 28]);
 
 
                 // Compute the minimum values
@@ -240,14 +236,14 @@ void FW_SSE(int** A, int K, int I, int J, int N) {
                 // __m128i min_val7 = _mm_min_epi32(a_ij7, sum7);
 
                 // Store the results back to A[i][j]
-                _mm_storeu_si128((__m128i*)&A[i][j], min_val0);
-                _mm_storeu_si128((__m128i*)&A[i][j + 4], min_val1);
-                _mm_storeu_si128((__m128i*)&A[i][j + 8], min_val2);
-                _mm_storeu_si128((__m128i*)&A[i][j + 12], min_val3);
-                // _mm_storeu_si128((__m128i*)&A[i][j + 16], min_val4);
-                // _mm_storeu_si128((__m128i*)&A[i][j + 20], min_val5);
-                // _mm_storeu_si128((__m128i*)&A[i][j + 24], min_val6);
-                // _mm_storeu_si128((__m128i*)&A[i][j + 28], min_val7);
+                _mm_store_si128((__m128i*)&A[i][j], min_val0);
+                _mm_store_si128((__m128i*)&A[i][j + 4], min_val1);
+                _mm_store_si128((__m128i*)&A[i][j + 8], min_val2);
+                _mm_store_si128((__m128i*)&A[i][j + 12], min_val3);
+                // _mm_store_si128((__m128i*)&A[i][j + 16], min_val4);
+                // _mm_store_si128((__m128i*)&A[i][j + 20], min_val5);
+                // _mm_store_si128((__m128i*)&A[i][j + 24], min_val6);
+                // _mm_store_si128((__m128i*)&A[i][j + 28], min_val7);
             }
 
             // // Handle remaining elements (if N is not a multiple of 32)
@@ -290,14 +286,14 @@ void FW_AVX2(int** A, int K, int I, int J, int N) {
                 void* const a_addr_kj7 = &A[k][j + 56];
 
 
-                __m256i a_kj0 = _mm256_loadu_si256((__m256i*)a_addr_kj0);
-                __m256i a_kj1 = _mm256_loadu_si256((__m256i*)a_addr_kj1);
-                __m256i a_kj2 = _mm256_loadu_si256((__m256i*)a_addr_kj2);
-                __m256i a_kj3 = _mm256_loadu_si256((__m256i*)a_addr_kj3);
-                __m256i a_kj4 = _mm256_loadu_si256((__m256i*)a_addr_kj4);
-                __m256i a_kj5 = _mm256_loadu_si256((__m256i*)a_addr_kj5);
-                __m256i a_kj6 = _mm256_loadu_si256((__m256i*)a_addr_kj6);
-                __m256i a_kj7 = _mm256_loadu_si256((__m256i*)a_addr_kj7);
+                __m256i a_kj0 = _mm256_load_si256((__m256i*)a_addr_kj0);
+                __m256i a_kj1 = _mm256_load_si256((__m256i*)a_addr_kj1);
+                __m256i a_kj2 = _mm256_load_si256((__m256i*)a_addr_kj2);
+                __m256i a_kj3 = _mm256_load_si256((__m256i*)a_addr_kj3);
+                __m256i a_kj4 = _mm256_load_si256((__m256i*)a_addr_kj4);
+                __m256i a_kj5 = _mm256_load_si256((__m256i*)a_addr_kj5);
+                __m256i a_kj6 = _mm256_load_si256((__m256i*)a_addr_kj6);
+                __m256i a_kj7 = _mm256_load_si256((__m256i*)a_addr_kj7);
 
                 // Compute A[i][k] + A[k][j:j+31]
                 __m256i sum0 = _mm256_add_epi32(a_ik, a_kj0);
@@ -309,14 +305,14 @@ void FW_AVX2(int** A, int K, int I, int J, int N) {
                 __m256i sum6 = _mm256_add_epi32(a_ik, a_kj6);
                 __m256i sum7 = _mm256_add_epi32(a_ik, a_kj7);
 
-                __m256i a_ij0 = _mm256_loadu_si256((__m256i*)a_addr_ij0);
-                __m256i a_ij1 = _mm256_loadu_si256((__m256i*)a_addr_ij1);
-                __m256i a_ij2 = _mm256_loadu_si256((__m256i*)a_addr_ij2);
-                __m256i a_ij3 = _mm256_loadu_si256((__m256i*)a_addr_ij3);
-                __m256i a_ij4 = _mm256_loadu_si256((__m256i*)a_addr_ij4);
-                __m256i a_ij5 = _mm256_loadu_si256((__m256i*)a_addr_ij5);
-                __m256i a_ij6 = _mm256_loadu_si256((__m256i*)a_addr_ij6);
-                __m256i a_ij7 = _mm256_loadu_si256((__m256i*)a_addr_ij7);
+                __m256i a_ij0 = _mm256_load_si256((__m256i*)a_addr_ij0);
+                __m256i a_ij1 = _mm256_load_si256((__m256i*)a_addr_ij1);
+                __m256i a_ij2 = _mm256_load_si256((__m256i*)a_addr_ij2);
+                __m256i a_ij3 = _mm256_load_si256((__m256i*)a_addr_ij3);
+                __m256i a_ij4 = _mm256_load_si256((__m256i*)a_addr_ij4);
+                __m256i a_ij5 = _mm256_load_si256((__m256i*)a_addr_ij5);
+                __m256i a_ij6 = _mm256_load_si256((__m256i*)a_addr_ij6);
+                __m256i a_ij7 = _mm256_load_si256((__m256i*)a_addr_ij7);
 
                 // Compute the minimum values
                 __m256i min_val0 = _mm256_min_epi32(a_ij0, sum0);
@@ -329,14 +325,14 @@ void FW_AVX2(int** A, int K, int I, int J, int N) {
                 __m256i min_val7 = _mm256_min_epi32(a_ij7, sum7);
 
                 // Store the results back to A[i][j]
-                _mm256_storeu_si256((__m256i*)a_addr_ij0, min_val0);
-                _mm256_storeu_si256((__m256i*)a_addr_ij1, min_val1);
-                _mm256_storeu_si256((__m256i*)a_addr_ij2, min_val2);
-                _mm256_storeu_si256((__m256i*)a_addr_ij3, min_val3);
-                _mm256_storeu_si256((__m256i*)a_addr_ij4, min_val4);
-                _mm256_storeu_si256((__m256i*)a_addr_ij5, min_val5);
-                _mm256_storeu_si256((__m256i*)a_addr_ij6, min_val6);
-                _mm256_storeu_si256((__m256i*)a_addr_ij7, min_val7);
+                _mm256_store_si256((__m256i*)a_addr_ij0, min_val0);
+                _mm256_store_si256((__m256i*)a_addr_ij1, min_val1);
+                _mm256_store_si256((__m256i*)a_addr_ij2, min_val2);
+                _mm256_store_si256((__m256i*)a_addr_ij3, min_val3);
+                _mm256_store_si256((__m256i*)a_addr_ij4, min_val4);
+                _mm256_store_si256((__m256i*)a_addr_ij5, min_val5);
+                _mm256_store_si256((__m256i*)a_addr_ij6, min_val6);
+                _mm256_store_si256((__m256i*)a_addr_ij7, min_val7);
             }
 
             // // Handle remaining elements (if N is not a multiple of 32)
