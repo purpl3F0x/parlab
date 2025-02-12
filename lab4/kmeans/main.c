@@ -180,6 +180,7 @@ int main(int argc, char** argv) {
 
     // * TODO: Broadcast the recvcounts and displs arrays to other ranks.
     MPI_Bcast(recvcounts, size, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Bcast(displs, size, MPI_INT, 0, MPI_COMM_WORLD);
 
     //* TODO: Gather membership information from every rank. (hint: each rank may send different number of objects)
     MPI_Gatherv(membership,
