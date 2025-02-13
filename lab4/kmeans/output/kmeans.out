@@ -1,0 +1,8 @@
+nodes = sequential, nloops =  10, total = 31.0690s, per loop =  3.1069s
+nodes =  1, nloops =  10, total = 27.3422s, per loop =  2.7342s
+nodes =  2, nloops =  10, total = 13.6863s, per loop =  1.3686s
+nodes =  4, nloops =  10, total =  6.8761s, per loop =  0.6876s
+nodes =  8, nloops =  10, total =  3.4360s, per loop =  0.3436s
+nodes = 16, nloops =  10, total =  1.7307s, per loop =  0.1731s
+nodes = 32, nloops =  10, total =  0.9883s, per loop =  0.0988s
+nodes = 64, nloops =  10, total =  0.4764s, per loop =  0.0476s
