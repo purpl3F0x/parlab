@@ -149,7 +149,7 @@ int main(int argc, char** argv) {
            clusters);
 
     /*
-    if (rank == 0) {    
+    if (rank == 0) {
         printf("Final cluster centers:\n");
         for (i=0; i<numClusters; i++) {
             printf("clusters[%ld] = ",i);
@@ -162,19 +162,16 @@ int main(int argc, char** argv) {
 
     // Gather membership information from all ranks to tot_membership
     int recvcounts[size], displs[size];
+
     if (rank == 0) {
-        /* TODO: Calculate recvcounts and displs, which will be used to gather data from each rank.
-         * Hint: recvcounts: number of elements received from each rank
-         *       displs: displacement of each rank's data 
-         */
         int div   = numObjs / size;
         int rem   = numObjs % size;
         int accum = 0;
 
         for (i = 0; i < size; i++) {
-            recvcounts[i] = numCoords * (div + ((rem > i) ? 1 : 0));
-            displs[i]     = accum;
-            accum += recvcounts[i];
+                recvcounts[i] = div + ((rem > i) ? 1 : 0);
+                displs[i] = accum;
+                accum += recvcounts[i];
         }
     }
 

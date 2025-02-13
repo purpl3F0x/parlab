@@ -134,7 +134,7 @@ void kmeans(double* objects,        /* in: [numObjs][numCoords] */
             }
         }
 
-        //* TODO: Perform reduction from rank_delta variable to delta variable, that will be used for convergence check.
+        //* TODO: Perform reduction from rank_delta variable to delta variable, that will be used for  convergence check.
         MPI_Allreduce(&rank_delta, &delta, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
 
         // Get fraction of objects whose membership changed during this loop. This is used as a convergence criterion.

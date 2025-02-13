@@ -14,5 +14,6 @@
 ## Start
 ## Run make in the src folder
 
+module load openmpi/1.8.3
 cd $HOME/a4/heat_transfer/mpi
 make clean && make

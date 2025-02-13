@@ -5,38 +5,20 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-void RedSOR(double** u_previous,
-            double** u_current,
-            int      X_min,
-            int      X_max,
-            int      Y_min,
-            int      Y_max,
-            double   omega) {
+void GaussSeidel(double** u_previous,
+                 double** u_current,
+                 int      X_min,
+                 int      X_max,
+                 int      Y_min,
+                 int      Y_max,
+                 double   omega) {
     int i, j;
     for (i = X_min; i < X_max; i++)
         for (j = Y_min; j < Y_max; j++)
-            if ((i + j) % 2 == 0)
-                u_current[i][j] =
-                  u_previous[i][j] + (omega / 4.0) * (u_previous[i - 1][j] + u_previous[i + 1][j] +
-                                                      u_previous[i][j - 1] + u_previous[i][j + 1] -
-                                                      4 * u_previous[i][j]);
-}
-
-void BlackSOR(double** u_previous,
-              double** u_current,
-              int      X_min,
-              int      X_max,
-              int      Y_min,
-              int      Y_max,
-              double   omega) {
-    int i, j;
-    for (i = X_min; i < X_max; i++)
-        for (j = Y_min; j < Y_max; j++)
-            if ((i + j) % 2 == 1)
-                u_current[i][j] =
-                  u_previous[i][j] +
-                  (omega / 4.0) * (u_current[i - 1][j] + u_current[i + 1][j] + u_current[i][j - 1] +
-                                   u_current[i][j + 1] - 4 * u_previous[i][j]);
+            u_current[i][j] =
+              u_previous[i][j] + (u_current[i - 1][j] + u_previous[i + 1][j] + u_current[i][j - 1] +
+                                  u_previous[i][j + 1] - 4 * u_previous[i][j]) *
+                                   omega / 4.0;
 }
 
 int main(int argc, char** argv) {
@@ -63,6 +45,13 @@ int main(int argc, char** argv) {
     **swap; //Global matrix, local current and previous matrices, pointer to swap between current and previous
 
     MPI_Status status;
+
+    MPI_Request prev_request[6];
+    MPI_Status  prev_status[6];
+    MPI_Request current_request[2];
+    MPI_Status  current_status[2];
+    int         prev_request_len    = 0;
+    int         current_request_len = 0;
 
 
     MPI_Init(&argc, &argv);
@@ -165,7 +154,7 @@ int main(int argc, char** argv) {
     zero2d(u_current, local[0] + 2, local[1] + 2);
 
     // clang-format off
-    double* U0_ptr = (rank == 0) ? &(U[0][0]) : NULL;
+    double* U0_ptr = (rank == 0) ? &(U[0][0]) : NULL; 
     MPI_Scatterv(U0_ptr, scattercounts, scatteroffset, global_block, &(u_previous[1][1]), 1, local_block, 0, MPI_COMM_WORLD);
     MPI_Scatterv(U0_ptr, scattercounts, scatteroffset, global_block, &(u_current[1][1]), 1, local_block, 0, MPI_COMM_WORLD);
     // clang-format on
@@ -218,10 +207,10 @@ int main(int argc, char** argv) {
 
 
     /*Three types of ranges:
-                -internal processes
-                -boundary processes
-                -boundary processes and padded global array
-        */
+		-internal processes
+		-boundary processes
+		-boundary processes and padded global array
+	*/
 
     /* internal process (ghost cell only) */
     i_min = 1;
@@ -277,158 +266,84 @@ int main(int argc, char** argv) {
 
         /*Compute and Communicate*/
 
-        /*********************/
-        /******** RED ********/
-        /*********************/
+        current_request_len = 0;
+        prev_request_len    = 0;
+
 
         // Communicate with north
         if (north != MPI_PROC_NULL) {
-            MPI_Sendrecv(&u_previous[1][1],
-                         local[1],
-                         MPI_DOUBLE,
-                         north,
-                         0,
-                         &u_previous[0][1],
-                         local[1],
-                         MPI_DOUBLE,
-                         north,
-                         0,
-                         MPI_COMM_WORLD,
-                         &status);
-        }
+            MPI_Isend(&u_previous[1][1],
+                      local[1],
+                      MPI_DOUBLE,
+                      north,
+                      0,
+                      MPI_COMM_WORLD,
+                      &prev_request[prev_request_len]);
+            MPI_Irecv(&u_current[0][1],
+                      local[1],
+                      MPI_DOUBLE,
+                      north,
+                      0,
+                      MPI_COMM_WORLD,
+                      &prev_request[prev_request_len + 1]);
 
-        // Communicate with south
-        if (south != MPI_PROC_NULL) {
-            MPI_Sendrecv(&u_previous[local[0]][1],
-                         local[1],
-                         MPI_DOUBLE,
-                         south,
-                         0,
-                         &u_previous[local[0] + 1][1],
-                         local[1],
-                         MPI_DOUBLE,
-                         south,
-                         0,
-                         MPI_COMM_WORLD,
-                         &status);
-        }
-
-        // Communicate with east
-        if (east != MPI_PROC_NULL) {
-            MPI_Sendrecv(&u_previous[1][local[1]],
-                         1,
-                         column,
-                         east,
-                         0,
-                         &u_previous[1][local[1] + 1],
-                         1,
-                         column,
-                         east,
-                         0,
-                         MPI_COMM_WORLD,
-                         &status);
+            prev_request_len += 2;
         }
 
         // Communicate with west
         if (west != MPI_PROC_NULL) {
-            MPI_Sendrecv(&u_previous[1][1],
-                         1,
-                         column,
-                         west,
-                         0,
-                         &u_previous[1][0],
-                         1,
-                         column,
-                         west,
-                         0,
-                         MPI_COMM_WORLD,
-                         &status);
+            MPI_Isend(&u_previous[1][1],
+                      1,
+                      column,
+                      west,
+                      0,
+                      MPI_COMM_WORLD,
+                      &prev_request[prev_request_len]);
+            MPI_Irecv(&u_current[1][0],
+                      1,
+                      column,
+                      west,
+                      0,
+                      MPI_COMM_WORLD,
+                      &prev_request[prev_request_len + 1]);
+
+            prev_request_len += 2;
         }
+
+        // Communicate with south
+        if (south != MPI_PROC_NULL) {
+            MPI_Irecv(&u_previous[local[0] + 1][1],
+                      local[1],
+                      MPI_DOUBLE,
+                      south,
+                      0,
+                      MPI_COMM_WORLD,
+                      &prev_request[prev_request_len]);
+
+            prev_request_len += 1;
+        }
+
+        // Communicate with east
+        if (east != MPI_PROC_NULL) {
+            MPI_Irecv(&u_previous[1][local[1] + 1],
+                      1,
+                      MPI_DOUBLE,
+                      south,
+                      0,
+                      MPI_COMM_WORLD,
+                      &prev_request[prev_request_len]);
+
+            prev_request_len += 1;
+        }
+
 
         /*Add appropriate timers for computation*/
 
         gettimeofday(&tcs, NULL);
         {
-            RedSOR(u_previous, u_current, i_min, i_max, j_min, j_max, omega);
+            GaussSeidel(u_previous, u_current, i_min, i_max, j_min, j_max, omega);
         }
         gettimeofday(&tcf, NULL);
-        tcomp += (tcf.tv_sec - tcs.tv_sec) + (tcf.tv_usec - tcs.tv_usec) * 0.000001;
-
-        /*********************/
-        /******* Black *******/
-        /*********************/
-
-        // Communicate with north
-        if (north != MPI_PROC_NULL) {
-            MPI_Sendrecv(&u_current[1][1],
-                         local[1],
-                         MPI_DOUBLE,
-                         north,
-                         0,
-                         &u_current[0][1],
-                         local[1],
-                         MPI_DOUBLE,
-                         north,
-                         0,
-                         MPI_COMM_WORLD,
-                         &status);
-        }
-
-        // Communicate with south
-        if (south != MPI_PROC_NULL) {
-            MPI_Sendrecv(&u_current[local[0]][1],
-                         local[1],
-                         MPI_DOUBLE,
-                         south,
-                         0,
-                         &u_current[local[0] + 1][1],
-                         local[1],
-                         MPI_DOUBLE,
-                         south,
-                         0,
-                         MPI_COMM_WORLD,
-                         &status);
-        }
-
-        // Communicate with east
-        if (east != MPI_PROC_NULL) {
-            MPI_Sendrecv(&u_current[1][local[1]],
-                         1,
-                         column,
-                         east,
-                         0,
-                         &u_current[1][local[1] + 1],
-                         1,
-                         column,
-                         east,
-                         0,
-                         MPI_COMM_WORLD,
-                         &status);
-        }
-
-        // Communicate with west
-        if (west != MPI_PROC_NULL) {
-            MPI_Sendrecv(&u_current[1][1],
-                         1,
-                         column,
-                         west,
-                         0,
-                         &u_current[1][0],
-                         1,
-                         column,
-                         west,
-                         0,
-                         MPI_COMM_WORLD,
-                         &status);
-        }
-
-        /*Add appropriate timers for computation*/
-        gettimeofday(&tcs, NULL);
-        {
-            BlackSOR(u_previous, u_current, i_min, i_max, j_min, j_max, omega);
-        }
-        gettimeofday(&tcf, NULL);
-
         tcomp += (tcf.tv_sec - tcs.tv_sec) + (tcf.tv_usec - tcs.tv_usec) * 0.000001;
 
 
@@ -484,14 +399,13 @@ int main(int argc, char** argv) {
                 0,
                 MPI_COMM_WORLD);
 
-
     //************************************//
 
 
     //----Printing results----//
 
     if (rank == 0) {
-        printf("Red-Black X=%d, Y=%d, Workers=%d, Px=%d, Py=%d, Iter=%d, ComputationTime=%lf, "
+        printf("Gauss-Seidel X=%d, Y=%d, Workers=%d, Px=%d, Py=%d, Iter=%d, ComputationTime=%lf, "
                "TotalTime=%lf, "
                "midpoint=%lf\n",
                global[0],
@@ -504,12 +418,12 @@ int main(int argc, char** argv) {
                total_time,
                U[global[0] / 2][global[1] / 2]);
 
-        #ifdef PRINT_RESULTS
+#ifdef PRINT_RESULTS
         char* s = malloc(50 * sizeof(char));
-        sprintf(s, "resRedBlackSORMPI_%dx%d_%dx%d", global[0], global[1], grid[0], grid[1]);
+        sprintf(s, "resSeidelMPI_%dx%d_%dx%d", global[0], global[1], grid[0], grid[1]);
         fprint2d(s, U, global[0], global[1]);
         free(s);
-        #endif
+#endif
     }
 
     MPI_Finalize();

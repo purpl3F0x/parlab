@@ -137,7 +137,7 @@ int main(int argc, char** argv) {
     init2d(u_current, local[0] + 2, local[1] + 2);
 
     // clang-format off
-    double* U0_ptr = (rank == 0) ? &(U[0][0]) : NULL; 
+    double* U0_ptr = (rank == 0) ? &(U[0][0]) : NULL;
     MPI_Scatterv(U0_ptr, scattercounts, scatteroffset, global_block, &(u_previous[1][1]), 1, local_block, 0, MPI_COMM_WORLD);
     MPI_Scatterv(U0_ptr, scattercounts, scatteroffset, global_block, &(u_current[1][1]), 1, local_block, 0, MPI_COMM_WORLD);
     // clang-format on
@@ -190,10 +190,10 @@ int main(int argc, char** argv) {
 
 
     /*Three types of ranges:
-		-internal processes
-		-boundary processes
-		-boundary processes and padded global array
-	*/
+                -internal processes
+                -boundary processes
+                -boundary processes and padded global array
+        */
 
     /* internal process (ghost cell only) */
     i_min = 1;

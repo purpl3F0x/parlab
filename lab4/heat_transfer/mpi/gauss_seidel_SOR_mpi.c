@@ -154,7 +154,7 @@ int main(int argc, char** argv) {
     zero2d(u_current, local[0] + 2, local[1] + 2);
 
     // clang-format off
-    double* U0_ptr = (rank == 0) ? &(U[0][0]) : NULL; 
+    double* U0_ptr = (rank == 0) ? &(U[0][0]) : NULL;
     MPI_Scatterv(U0_ptr, scattercounts, scatteroffset, global_block, &(u_previous[1][1]), 1, local_block, 0, MPI_COMM_WORLD);
     MPI_Scatterv(U0_ptr, scattercounts, scatteroffset, global_block, &(u_current[1][1]), 1, local_block, 0, MPI_COMM_WORLD);
     // clang-format on
@@ -207,10 +207,10 @@ int main(int argc, char** argv) {
 
 
     /*Three types of ranges:
-		-internal processes
-		-boundary processes
-		-boundary processes and padded global array
-	*/
+                -internal processes
+                -boundary processes
+                -boundary processes and padded global array
+        */
 
     /* internal process (ghost cell only) */
     i_min = 1;
@@ -327,8 +327,8 @@ int main(int argc, char** argv) {
         if (east != MPI_PROC_NULL) {
             MPI_Irecv(&u_previous[1][local[1] + 1],
                       1,
-                      MPI_DOUBLE,
-                      south,
+                      column,
+                      east,
                       0,
                       MPI_COMM_WORLD,
                       &prev_request[prev_request_len]);
@@ -336,6 +336,7 @@ int main(int argc, char** argv) {
             prev_request_len += 1;
         }
 
+        MPI_Waitall(prev_request_len, prev_request, prev_status);
 
         /*Add appropriate timers for computation*/
 
@@ -346,6 +347,17 @@ int main(int argc, char** argv) {
         gettimeofday(&tcf, NULL);
         tcomp += (tcf.tv_sec - tcs.tv_sec) + (tcf.tv_usec - tcs.tv_usec) * 0.000001;
 
+        if (south != MPI_PROC_NULL) {
+                MPI_Isend(&u_current[local[0]][1], local[1], MPI_DOUBLE, south, 0, MPI_COMM_WORLD, &current_request[current_request_len]);
+            current_request_len += 1;
+        }
+
+        if (east != MPI_PROC_NULL){
+            MPI_Isend(&u_current[1][local[1]], 1, column, east, 0, MPI_COMM_WORLD, &current_request[current_request_len]);
+            current_request_len += 1;
+        }
+
+        MPI_Waitall(current_request_len, current_request, current_status);
 
 #ifdef TEST_CONV
         if (t % C == 0) {

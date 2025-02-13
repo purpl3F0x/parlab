@@ -2,10 +2,10 @@
 #PBS -N run_kmeans_mpi
 
 ## Output and error files
-#PBS -o make_kmeans.out
-#PBS -e make_kmeans.err
+#PBS -o run_kmeans_mpi.out
+#PBS -e run_kmeans_mpi.err
 
-## How many machines should we get? 
+## How many machines should we get?
 #PBS -l nodes=8:ppn=8
 
 ##How long should the job run for?
@@ -21,7 +21,7 @@ cd $HOME/a4/kmeans
 
 # Clear the output file
 mkdir -p output
-> ./results/game.out
+> ./output/kmeans.out
 
 
 # Run the job to PROCS times to get an average
@@ -36,11 +36,8 @@ mkdir -p output
 #        -d                 : enable debug mode
 #        -h                 : print this help information
 
-for i in 1 2 4 8 16 32 64;
+for i in 1 2 4 8 16 32 64
 do
 
-    mpirun -np $i  t --mca btl tcp,self ./kmeans_mpi -s 256 -n 16 -c 32  -l 10 1>>./results/kmeans.out
-
+        mpirun --mca btl tcp,self -np ${i} ./kmeans_mpi -s 256 -n 16 -c 32 -l 10 1>>./output/kmeans.out
 done
-
-

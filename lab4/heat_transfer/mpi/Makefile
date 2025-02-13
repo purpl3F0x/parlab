@@ -47,4 +47,4 @@ util.o: util.c
 
 
 clean:
-	rm jacobi_mpi jacobi_mpi_conv seidel_mpi seidel_mpi_conv redblack_mpi redblack_mpi_conv redblacksor_mpi *.o
+	rm -f jacobi_mpi jacobi_mpi_conv seidel_mpi seidel_mpi_conv redblack_mpi redblack_mpi_conv redblacksor_mpi *.o

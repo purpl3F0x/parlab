@@ -21,7 +21,7 @@ double* dataset_generation(int numObjs, int numCoords, long* rank_numObjs) {
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
     //* TODO: Calculate number of objects that each rank will examine (*rank_numObjs)
-    *rank_numObjs = numObjs / size + ((rank < numObjs % size) ? 1 : 0);
+    *rank_numObjs = numObjs / size + ((rank < (numObjs % size)) ? 1 : 0);
 
 
     //! For debugging
@@ -78,7 +78,7 @@ double* dataset_generation(int numObjs, int numCoords, long* rank_numObjs) {
                  displs,
                  MPI_DOUBLE,
                  rank_objects,
-                 *rank_numObjs * numCoords,
+                 (*rank_numObjs) * numCoords,
                  MPI_DOUBLE,
                  0,
                  MPI_COMM_WORLD);
