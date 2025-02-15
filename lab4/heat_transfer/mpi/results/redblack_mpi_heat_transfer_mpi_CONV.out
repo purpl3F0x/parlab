@@ -1,1 +1,3 @@
-Red-Black X=512, Y=512, Workers=64, Px=8, Py=8, Iter=1201, ComputationTime=0.039710, TotalTime=0.809850, midpoint=2.826975
+Red-Black X=512, Y=512, Workers=64, Px=8, Py=8, Iter=1201, ComputationTime=0.039307, TotalTime=0.604291, ConvergenceTime=0.014301, midpoint=2.826975
+Red-Black X=512, Y=512, Workers=64, Px=8, Py=8, Iter=1201, ComputationTime=0.039123, TotalTime=0.806069, ConvergenceTime=0.010597, midpoint=2.826975
+Red-Black X=512, Y=512, Workers=64, Px=8, Py=8, Iter=1201, ComputationTime=0.038937, TotalTime=0.621287, ConvergenceTime=0.010900, midpoint=2.826975

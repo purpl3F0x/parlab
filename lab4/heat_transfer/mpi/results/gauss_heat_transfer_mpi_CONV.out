@@ -1,1 +1,3 @@
-Gauss-Seidel X=512, Y=512, Workers=64, Px=8, Py=8, Iter=1501, ComputationTime=0.069833, TotalTime=0.465972, midpoint=2.826997
+Gauss-Seidel X=512, Y=512, Workers=64, Px=8, Py=8, Iter=1501, ComputationTime=0.070299, TotalTime=0.465522, ConvergenceTime=0.045958, midpoint=2.826997
+Gauss-Seidel X=512, Y=512, Workers=64, Px=8, Py=8, Iter=1501, ComputationTime=0.069439, TotalTime=0.462691, ConvergenceTime=0.045435, midpoint=2.826997
+Gauss-Seidel X=512, Y=512, Workers=64, Px=8, Py=8, Iter=1501, ComputationTime=0.069098, TotalTime=0.466691, ConvergenceTime=0.045880, midpoint=2.826997

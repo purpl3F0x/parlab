@@ -1,1 +1,3 @@
-Jacobi X=512, Y=512, Workers=64, Px=8, Py=8, Iter=236001, ComputationTime=2.680920, TotalTime=57.601796, midpoint=2.774119
+Jacobi X=512, Y=512, Workers=64, Px=8, Py=8, Iter=236001, ComputationTime=2.694952, TotalTime=57.938203, ConvergenceTime=1.764522, midpoint=2.774119
+Jacobi X=512, Y=512, Workers=64, Px=8, Py=8, Iter=236001, ComputationTime=2.683131, TotalTime=57.960915, ConvergenceTime=1.752181, midpoint=2.774119
+Jacobi X=512, Y=512, Workers=64, Px=8, Py=8, Iter=236001, ComputationTime=2.684137, TotalTime=57.958496, ConvergenceTime=1.749159, midpoint=2.774119
