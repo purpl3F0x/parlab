@@ -29,7 +29,7 @@ fw_tiled = pd.read_csv(os.path.join(METRICS_FOLDER, "fw_tiled_on_roids.csv")).re
 )
 
 # Plot 1: Sequential Floyd-Warshall Edition (single bar color)
-plt.figure(figsize=(14, 7))
+# plt.figure(figsize=(14, 7))
 sns.barplot(
     data=fw_seq, x="BATCH_SIZE", y="TIME", color=colors[0]
 )  # Apply first color in palette
@@ -39,7 +39,7 @@ plt.ylabel("Time (s)", fontsize=14)  # Increase ylabel font size
 plt.tick_params(axis="both", which="major", labelsize=12)  # Increase tick label size
 plt.savefig(os.path.join(PLOTS_FOLDER, "Sequential_Floyd_Warshall.svg"), format="svg")
 plt.close()
-
+exit()
 # Plot 2: Recursive Floyd-Warshall Edition
 for batch_size in fw_sr["BATCH_SIZE"].unique():
     plt.figure(figsize=(14, 7))
