@@ -90,7 +90,7 @@ for x, y in grid_sizes:
         lambda row: baseline_times[row["Method"]] / row["TotalTime"], axis=1
     )
 
-    plt.figure(figsize=(10, 6))
+    plt.figure()
     sns.lineplot(
         data=subset,
         x="Workers",

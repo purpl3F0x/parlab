@@ -16,6 +16,7 @@ FILES = [
     "gauss_heat_transfer_mpi_CONV.out",
 ]
 
+
 # Read data from files
 def read_data(file_path):
     data = []
@@ -62,6 +63,7 @@ def read_data(file_path):
                 )
     return data
 
+
 # Process all files
 data = []
 for file in FILES:
@@ -71,11 +73,11 @@ for file in FILES:
 df = pd.DataFrame(data)
 
 # Compute average times for each method
-avg_df = df.groupby("Method").agg({
-    "ComputationTime": "mean",
-    "TotalTime": "mean",
-    "ConvergenceTime": "mean"
-}).reset_index()
+avg_df = (
+    df.groupby("Method")
+    .agg({"ComputationTime": "mean", "TotalTime": "mean", "ConvergenceTime": "mean"})
+    .reset_index()
+)
 
 # Set plot style
 sns.set_theme(style="whitegrid")
@@ -86,10 +88,10 @@ plt.rcParams["font.size"] = 12
 # Define colors for computation time, convergence time, and total time
 COMPUTATION_COLOR = "#348ABD"  # Blue
 CONVERGENCE_COLOR = "#7A68A6"  # Purple
-TOTAL_COLOR = "#A60628"        # Red
+TOTAL_COLOR = "#A60628"  # Red
 
 # Generate stacked bar plot
-plt.figure(figsize=(10, 6))
+plt.figure()
 
 # Plot total time bars
 sns.barplot(
@@ -98,31 +100,32 @@ sns.barplot(
     y="TotalTime",
     color=TOTAL_COLOR,
     edgecolor="black",
-    label="Total Time"
+    label="Total Time",
 )
 
 # Plot convergence time bars
 for i, row in avg_df.iterrows():
     plt.bar(
-        row["Method"], 
-        row["ConvergenceTime"], 
+        row["Method"],
+        row["ConvergenceTime"],
         color=CONVERGENCE_COLOR,
         alpha=1,
-        label="Convergence Time" if i == 0 else ""  # Add label only once
+        label="Convergence Time" if i == 0 else "",  # Add label only once
     )
 
 # Plot computation time bars
 for i, row in avg_df.iterrows():
     plt.bar(
-        row["Method"], 
-        row["ComputationTime"], 
+        row["Method"],
+        row["ComputationTime"],
         color=COMPUTATION_COLOR,
         alpha=1,
-        label="Computation Time" if i == 0 else ""  # Add label only once
+        label="Computation Time" if i == 0 else "",  # Add label only once
     )
 
 # Manually create legend handles
 from matplotlib.patches import Patch
+
 legend_elements = [
     Patch(facecolor=COMPUTATION_COLOR, label="Computation Time"),
     Patch(facecolor=CONVERGENCE_COLOR, label="Convergence Time"),
@@ -130,7 +133,7 @@ legend_elements = [
 ]
 
 # Add legend
-plt.legend(handles=legend_elements, title="Time Type", loc="upper right")
+plt.legend(handles=legend_elements, title="Time Type", loc="best")
 
 plt.title("Time Comparison (64 MPI Workers)", fontsize=16)
 plt.xlabel("Method", fontsize=14)

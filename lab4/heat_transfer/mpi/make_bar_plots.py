@@ -16,6 +16,7 @@ FILES = [
     "redblack_mpi_heat_transfer_mpi.out",
 ]
 
+
 # Read data from files
 def read_data(file_path):
     data = []
@@ -50,6 +51,7 @@ def read_data(file_path):
                 )
     return data
 
+
 # Process all files
 data = []
 for file in FILES:
@@ -73,15 +75,15 @@ worker_counts = df["Workers"].unique()
 
 # Define colors for computation time and total time
 COMPUTATION_COLOR = "#348ABD"  # Blue
-TOTAL_COLOR = "#A60628"        # Red
+TOTAL_COLOR = "#A60628"  # Red
 
 # Generate stacked bar plots for each grid size and worker count
 for x, y in grid_sizes:
     for workers in worker_counts:
         subset = df[(df["X"] == x) & (df["Y"] == y) & (df["Workers"] == workers)]
-        
-        plt.figure(figsize=(10, 6))
-        
+
+        plt.figure()
+
         # Plot total time bars
         sns.barplot(
             data=subset,
@@ -89,35 +91,41 @@ for x, y in grid_sizes:
             y="TotalTime",
             color=TOTAL_COLOR,
             edgecolor="black",
-            label="Total Time"
+            label="Total Time",
         )
-        
+
         # Plot computation time bars
         for i, row in subset.iterrows():
             plt.bar(
-                row["Method"], 
-                row["ComputationTime"], 
+                row["Method"],
+                row["ComputationTime"],
                 color=COMPUTATION_COLOR,
                 alpha=1,
-                label="Computation Time" if i == 0 else ""  # Add label only once
+                label="Computation Time" if i == 0 else "",  # Add label only once
             )
-        
+
         # Manually create legend handles
         from matplotlib.patches import Patch
+
         legend_elements = [
             Patch(facecolor=COMPUTATION_COLOR, label="Computation Time"),
             Patch(facecolor=TOTAL_COLOR, label="Total Time"),
         ]
-        
+
         # Add legend
-        plt.legend(handles=legend_elements, title="Time Type", loc="upper right")
-        
-        plt.title(f"Computation vs Total Time for Grid {x}x{y} with {workers} Workers", fontsize=16)
+        plt.legend(handles=legend_elements, title="Time Type", loc="best")
+
+        plt.title(
+            f"Computation vs Total Time for Grid {x}x{y} with {workers} Workers",
+            fontsize=16,
+        )
         plt.xlabel("Method", fontsize=14)
         plt.ylabel("Time (s)", fontsize=14)
         plt.ylim(0, df[(df["X"] == x) & (df["Y"] == y)]["TotalTime"].max() * 1.1)
-        
-        plot_filename = os.path.join(PLOTS_FOLDER, f"stacked_bar_{x}x{y}_{workers}workers.svg")
+
+        plot_filename = os.path.join(
+            PLOTS_FOLDER, f"stacked_bar_{x}x{y}_{workers}workers.svg"
+        )
         plt.savefig(plot_filename, format="svg", bbox_inches="tight")
         plt.close()
         print(f"Saved: {plot_filename}")
